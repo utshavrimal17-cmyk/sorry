@@ -1,112 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SORRY MITTARRRRRR</title>
-    <style>
-        /* Modern CSS Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
+  <meta name="theme-color" content="#08080d" />
 
-        body {
-            background-color: #0a0a0c;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
+  <title></title>
 
-        /* Ambient Glow Background */
-        .ambient-glow {
-            position: absolute;
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle, rgba(120, 119, 198, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 1;
-        }
+  <style>
+    :root {
+      --bg-1: #050507;
+      --bg-2: #0b0b12;
+      --text: #f7f7fa;
+      --credit: rgba(247, 247, 250, 0.48);
+    }
 
-        /* Center Layout Container */
-        .container {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            width: 90%;
-            max-width: 900px;
-            padding: 20px;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        /* Main Heading */
-        .main-title {
-            font-size: clamp(2rem, 6.5vw, 4.5rem);
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            color: #ffffff;
-            text-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
-            opacity: 0;
-            transform: scale(0.95) translateY(10px);
-            animation: fadeInScale 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.2s;
-            word-break: break-word;
-        }
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      overflow: hidden;
+    }
 
-        /* Subtitle / Credit */
-        .subtitle {
-            font-size: clamp(0.85rem, 2.5vw, 1.15rem);
-            font-weight: 500;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 18px;
-            opacity: 0;
-            transform: translateY(10px);
-            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.5s;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
-        }
+    body {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(
+          circle at 50% 48%,
+          rgba(100, 90, 150, 0.10) 0%,
+          rgba(60, 55, 95, 0.045) 24%,
+          transparent 52%
+        ),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      color: var(--text);
+      font-family:
+        Inter,
+        ui-sans-serif,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
 
-        /* Keyframe Animations */
-        @keyframes fadeInScale {
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
+    /* Very subtle moving ambient light */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -35%;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(
+          circle at 50% 50%,
+          rgba(155, 145, 210, 0.055),
+          transparent 34%
+        );
+      filter: blur(35px);
+      animation: ambientMove 12s ease-in-out infinite alternate;
+    }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .content {
+      width: min(100%, 1100px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .main-text {
+      max-width: 100%;
+      font-size: clamp(2.8rem, 9vw, 7.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+      font-weight: 900;
+      white-space: nowrap;
+
+      opacity: 0;
+      transform: translateY(12px) scale(0.97);
+
+      text-shadow:
+        0 0 18px rgba(255, 255, 255, 0.08),
+        0 0 45px rgba(145, 135, 200, 0.08);
+
+      animation: mainIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+    }
+
+    .credit {
+      margin-top: 14px;
+
+      font-size: clamp(0.55rem, 1.5vw, 0.82rem);
+      line-height: 1;
+      letter-spacing: 0.22em;
+      font-weight: 500;
+      white-space: nowrap;
+
+      color: var(--credit);
+
+      opacity: 0;
+      transform: translateY(6px);
+
+      animation: creditIn 0.8s ease-out 0.65s forwards;
+    }
+
+    @keyframes mainIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes creditIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes ambientMove {
+      0% {
+        transform: translate(-2%, -1%) scale(1);
+      }
+
+      100% {
+        transform: translate(2%, 1%) scale(1.05);
+      }
+    }
+
+    /* Extra protection for very small phones */
+    @media (max-width: 360px) {
+      .page {
+        padding: 16px;
+      }
+
+      .main-text {
+        font-size: clamp(2.35rem, 10.5vw, 3.2rem);
+        letter-spacing: -0.06em;
+      }
+
+      .credit {
+        margin-top: 11px;
+        font-size: 0.5rem;
+        letter-spacing: 0.17em;
+      }
+    }
+
+    /* Tablet */
+    @media (min-width: 600px) {
+      .main-text {
+        font-size: clamp(4rem, 9vw, 7rem);
+      }
+    }
+
+    /* Reduced motion accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      body::before {
+        animation: none;
+      }
+
+      .main-text,
+      .credit {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
-
-    <div class="ambient-glow"></div>
-
-    <main class="container">
-        <h1 class="main-title">SORRY MITTARRRRRR</h1>
-        <div class="subtitle">CREATED BY UTSHAV</div>
-    </main>
-
+  <main class="page">
+    <div class="content">
+      <div class="main-text">SORRY MITTARRRRRR</div>
+      <div class="credit">CREATED BY UTSHAV</div>
+    </div>
+  </main>
 </body>
 </html>
