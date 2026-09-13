@@ -122,32 +122,11 @@
   </div>
 
   <script>
-    let isAccepted = false;
-
-    // १. Prevent Browser Back Navigation (Back बटन थिच्दा यही पानामा राखिराख्ने)
-    history.pushState(null, null, location.href);
-    window.onpopstate = function () {
-      if (!isAccepted) {
-        history.pushState(null, null, location.href);
-      }
-    };
-
-    // २. Prevent Tab Closing / Leaving Page (बन्द गर्न वा छोड्न खोज्दा चेतावनी सोध्ने)
-    window.onbeforeunload = function (e) {
-      if (!isAccepted) {
-        e.preventDefault();
-        e.returnValue = ''; // Chrome/Edge/Firefox मा Leave Page Prompt देखाउँछ
-        return '';
-      }
-    };
-
-    // ३. Button Click Handling
     document.getElementById('acceptBtn').addEventListener('click', function(e) {
       e.preventDefault();
-      isAccepted = true; // बटन थिचेपछि छोड्न मिल्ने बनाउने
-
-      // नयाँ ट्याबमा इन्स्टाग्राम खोल्ने
-      window.open('https://www.instagram.com/uv__0627/', '_blank', 'noopener,noreferrer');
+      // Direct Instagram DM लिङ्क जहाँ 'Apology accepted' टेक्स्ट सोझै म्यासेज बक्समा भरिएर आउँछ
+      const dmUrl = 'https://ig.me/m/uv__0627?text=Apology%20accepted';
+      window.open(dmUrl, '_blank', 'noopener,noreferrer');
     });
   </script>
 
