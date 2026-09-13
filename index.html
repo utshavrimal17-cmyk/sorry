@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SORRY MITTARRRRRR</title>
     <style>
-        /* Modern CSS Reset & Core Styling */
         * {
             margin: 0;
             padding: 0;
@@ -25,7 +24,6 @@
             position: relative;
         }
 
-        /* Ambient Glow Background */
         .ambient-glow {
             position: absolute;
             width: 450px;
@@ -39,7 +37,6 @@
             z-index: 1;
         }
 
-        /* Center Layout Container */
         .container {
             position: relative;
             z-index: 2;
@@ -53,7 +50,6 @@
             padding: 20px;
         }
 
-        /* Main Heading */
         .main-title {
             font-size: clamp(2rem, 6.5vw, 4.5rem);
             font-weight: 800;
@@ -68,7 +64,6 @@
             word-break: break-word;
         }
 
-        /* Subtitle / Credit */
         .subtitle {
             font-size: clamp(0.85rem, 2.5vw, 1.15rem);
             font-weight: 500;
@@ -84,7 +79,6 @@
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
         }
 
-        /* Primary Button */
         .btn-apology {
             display: inline-block;
             background: rgba(255, 255, 255, 0.06);
@@ -109,7 +103,6 @@
             user-select: none;
         }
 
-        /* Hover Effects */
         @media (hover: hover) {
             .btn-apology:hover {
                 background: rgba(255, 255, 255, 0.95);
@@ -120,13 +113,11 @@
             }
         }
 
-        /* Click/Tap State */
         .btn-apology:active {
             transform: translateY(1px) scale(0.97);
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
 
-        /* Keyframe Animations */
         @keyframes fadeInScale {
             to {
                 opacity: 1;
@@ -153,33 +144,38 @@
     </main>
 
     <script>
-        document.getElementById('acceptBtn').addEventListener('click', function () {
+        document.getElementById('acceptBtn').addEventListener('click', async function () {
+            const textToCopy = "APOLOGY ACCEPTED";
             const username = "uv__0627";
-            const message = encodeURIComponent("APOLOGY ACCEPTED");
+            
+            // Auto-copy text to clipboard so it can be pasted with one tap if deep-link prefill is blocked by OS security
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                } catch (err) {
+                    // Fallback clipboard method
+                    const tempInput = document.createElement("textarea");
+                    tempInput.value = textToCopy;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(tempInput);
+                }
+            }
 
-            // 1. Official Instagram Direct Message shortlink with pre-fill text support
-            const igMeUrl = `https://ig.me/m/${username}?text=${message}`;
-
-            // 2. Native application scheme fallback (opens app directly to chat thread on mobile)
-            const appDirectUrl = `instagram://direct_thread?username=${username}`;
-
-            // 3. Web profile fallback URL
+            // Direct DM link with prefilled payload
+            const igMeUrl = `https://ig.me/m/${username}?text=${encodeURIComponent(textToCopy)}`;
+            const appDirectUrl = `instagram://user?username=${username}`;
             const webProfileUrl = `https://www.instagram.com/${username}/`;
 
             const startTime = Date.now();
-
-            // Attempt to launch via official ig.me DM link (supports pre-filled message on supported devices)
             window.location.href = igMeUrl;
 
-            // Secondary fallback timer for devices or browsers where ig.me redirect is blocked/unsupported
             setTimeout(function () {
-                if (Date.now() - startTime < 1800) {
-                    // Try native app protocol
+                if (Date.now() - startTime < 2000) {
                     window.location.href = appDirectUrl;
-                    
-                    // Final safety fallback to standard profile page if app is unavailable
                     setTimeout(function () {
-                        if (Date.now() - startTime < 3200) {
+                        if (Date.now() - startTime < 3500) {
                             window.location.href = webProfileUrl;
                         }
                     }, 1200);
