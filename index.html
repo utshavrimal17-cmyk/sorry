@@ -67,14 +67,13 @@
       animation: fadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    /* Subtitle: by utshav */
+    /* Subtitle: created by utshav (Medium Size) */
     .subtitle {
-      font-size: clamp(0.8rem, 2.5vw, 1.2rem);
-      font-weight: 300;
-      letter-spacing: 0.2em;
-      text-transform: lowercase;
-      color: rgba(255, 255, 255, 0.6);
-      margin-top: -10px;
+      font-size: clamp(1.1rem, 3.5vw, 1.8rem);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 5px;
       margin-bottom: 40px;
       opacity: 0;
       transform: translateY(20px);
@@ -131,7 +130,7 @@
 
   <div class="container">
     <h1>SORRY</h1>
-    <span class="subtitle">by utshav</span>
+    <span class="subtitle">created by utshav</span>
     <button class="btn" id="acceptBtn">APOLOGY ACCEPTED</button>
   </div>
 
@@ -139,11 +138,13 @@
     document.getElementById('acceptBtn').addEventListener('click', function(e) {
       e.preventDefault();
       
-      // १. Instagram Direct DM Official URL (ig.me)
-      const directDmUrl = 'https://ig.me/m/uv__0627';
+      // WhatsApp Direct Link with Pre-filled message "Apology accepted"
+      const phone = '9779808904149';
+      const message = encodeURIComponent('Apology accepted');
+      const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
 
-      // नयाँ ट्याब/एपमा सोझै DM खोल्छ
-      window.open(directDmUrl, '_blank');
+      // Open WhatsApp Direct Chat
+      window.open(whatsappUrl, '_blank');
     });
   </script>
 
