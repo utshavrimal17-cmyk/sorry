@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SORRY MITTARRRRRR</title>
     <style>
+        /* Modern CSS Reset */
         * {
             margin: 0;
             padding: 0;
@@ -24,6 +25,7 @@
             position: relative;
         }
 
+        /* Ambient Glow Background */
         .ambient-glow {
             position: absolute;
             width: 450px;
@@ -37,6 +39,7 @@
             z-index: 1;
         }
 
+        /* Center Layout Container */
         .container {
             position: relative;
             z-index: 2;
@@ -50,6 +53,7 @@
             padding: 20px;
         }
 
+        /* Main Heading */
         .main-title {
             font-size: clamp(2rem, 6.5vw, 4.5rem);
             font-weight: 800;
@@ -64,6 +68,7 @@
             word-break: break-word;
         }
 
+        /* Subtitle / Credit */
         .subtitle {
             font-size: clamp(0.85rem, 2.5vw, 1.15rem);
             font-weight: 500;
@@ -71,7 +76,6 @@
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.6);
             margin-top: 18px;
-            margin-bottom: 48px;
             opacity: 0;
             transform: translateY(10px);
             animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -79,45 +83,7 @@
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
         }
 
-        .btn-apology {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            color: #ffffff;
-            padding: 18px 36px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            text-decoration: none;
-            border-radius: 100px;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.05);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            opacity: 0;
-            transform: translateY(10px);
-            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.8s;
-            user-select: none;
-        }
-
-        @media (hover: hover) {
-            .btn-apology:hover {
-                background: rgba(255, 255, 255, 0.95);
-                color: #0a0a0c;
-                border-color: #ffffff;
-                box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-                transform: translateY(-2px) scale(1.02);
-            }
-        }
-
-        .btn-apology:active {
-            transform: translateY(1px) scale(0.97);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        }
-
+        /* Keyframe Animations */
         @keyframes fadeInScale {
             to {
                 opacity: 1;
@@ -140,19 +106,7 @@
     <main class="container">
         <h1 class="main-title">SORRY MITTARRRRRR</h1>
         <div class="subtitle">CREATED BY UTSHAV</div>
-        <button class="btn-apology" id="acceptBtn">APOLOGY ACCEPTED</button>
     </main>
 
-    <script>
-        document.getElementById('acceptBtn').addEventListener('click', function () {
-            const username = "uv__0627";
-            const message = "APOLOGY ACCEPTED";
-            
-            // Standard Instagram DM link format containing the prefilled parameter
-            const targetUrl = `https://ig.me/m/${username}?text=${encodeURIComponent(message)}`;
-
-            window.location.href = targetUrl;
-        });
-    </script>
 </body>
 </html>
