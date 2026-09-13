@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SORRY</title>
   <style>
-    /* CSS Reset & Base Styles */
+    /* Reset & Base Styles */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -26,7 +26,7 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Subtle Ambient Glow in Background */
+    /* Ambient Glow Background */
     body::before {
       content: "";
       position: absolute;
@@ -68,7 +68,7 @@
       animation: fadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    /* Button Style */
+    /* Button Styling */
     .btn {
       display: inline-block;
       padding: 18px 42px;
@@ -91,7 +91,7 @@
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     }
 
-    /* Button Hover & Tap State */
+    /* Button Hover & Tap States */
     .btn:hover, .btn:focus {
       background: rgba(255, 255, 255, 1);
       color: #0a0a0c;
@@ -105,7 +105,7 @@
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     }
 
-    /* Smooth Entrance Keyframes */
+    /* Keyframes */
     @keyframes fadeIn {
       to {
         opacity: 1;
@@ -118,13 +118,37 @@
 
   <div class="container">
     <h1>SORRY</h1>
-    <button class="btn" onclick="acceptApology()">APOLOGY ACCEPTED</button>
+    <button class="btn" id="acceptBtn">APOLOGY ACCEPTED</button>
   </div>
 
   <script>
-    function acceptApology() {
+    let isAccepted = false;
+
+    // १. Prevent Browser Back Navigation (Back बटन थिच्दा यही पानामा राखिराख्ने)
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+      if (!isAccepted) {
+        history.pushState(null, null, location.href);
+      }
+    };
+
+    // २. Prevent Tab Closing / Leaving Page (बन्द गर्न वा छोड्न खोज्दा चेतावनी सोध्ने)
+    window.onbeforeunload = function (e) {
+      if (!isAccepted) {
+        e.preventDefault();
+        e.returnValue = ''; // Chrome/Edge/Firefox मा Leave Page Prompt देखाउँछ
+        return '';
+      }
+    };
+
+    // ३. Button Click Handling
+    document.getElementById('acceptBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      isAccepted = true; // बटन थिचेपछि छोड्न मिल्ने बनाउने
+
+      // नयाँ ट्याबमा इन्स्टाग्राम खोल्ने
       window.open('https://www.instagram.com/uv__0627/', '_blank', 'noopener,noreferrer');
-    }
+    });
   </script>
 
 </body>
