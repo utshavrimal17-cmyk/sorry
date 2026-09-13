@@ -1,150 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SORRY MITTARRRRRR</title>
-  <style>
-    /* Reset & Base Styles */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SORRY MITTARRRRRR</title>
+    <style>
+        /* Modern CSS Reset & Core Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    body, html {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background-color: #0a0a0c;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #ffffff;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+        body {
+            background-color: #0a0a0c;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
 
-    /* Ambient Glow Background */
-    body::before {
-      content: "";
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0) 70%);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 1;
-    }
+        /* Subtle Ambient Glow Background */
+        .ambient-glow {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(120, 119, 198, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-    /* Main Container */
-    .container {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-    }
+        /* Container Setup */
+        .container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 90%;
+            max-width: 900px;
+            padding: 20px;
+        }
 
-    /* Heading: SORRY MITTARRRRRR */
-    h1 {
-      font-size: clamp(2.5rem, 8vw, 6rem);
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #ffffff;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.2),
-                   0 0 60px rgba(255, 255, 255, 0.1);
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
+        /* Main Heading */
+        .main-title {
+            font-size: clamp(2rem, 6.5vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
+            opacity: 0;
+            transform: scale(0.95) translateY(10px);
+            animation: fadeInScale 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.2s;
+            word-break: break-word;
+        }
 
-    /* Subtitle: CREATED BY UTSHAV (Medium Size & Uppercase) */
-    .subtitle {
-      font-size: clamp(1.1rem, 3.5vw, 1.8rem);
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.7);
-      margin-top: 15px;
-      margin-bottom: 40px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
-    }
+        /* Subtitle / Credit */
+        .subtitle {
+            font-size: clamp(0.85rem, 2.5vw, 1.15rem);
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 18px;
+            margin-bottom: 48px;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.5s;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+        }
 
-    /* Button Styling */
-    .btn {
-      display: inline-block;
-      padding: 18px 42px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 50px;
-      backdrop-filter: blur(10px);
-      cursor: pointer;
-      outline: none;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    }
+        /* Primary Button */
+        .btn-apology {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            padding: 18px 36px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 100px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.8s;
+            user-select: none;
+        }
 
-    /* Button Hover & Tap States */
-    .btn:hover, .btn:focus {
-      background: rgba(255, 255, 255, 1);
-      color: #0a0a0c;
-      border-color: rgba(255, 255, 255, 1);
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px) scale(1.02);
-    }
+        /* Desktop Hover Effects */
+        @media (hover: hover) {
+            .btn-apology:hover {
+                background: rgba(255, 255, 255, 0.95);
+                color: #0a0a0c;
+                border-color: #ffffff;
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+                transform: translateY(-2px) scale(1.02);
+            }
+        }
 
-    .btn:active {
-      transform: translateY(1px) scale(0.98);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-    }
+        /* Active / Click State */
+        .btn-apology:active {
+            transform: translateY(1px) scale(0.97);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
 
-    /* Keyframes */
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+        /* Keyframe Animations */
+        @keyframes fadeInScale {
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>SORRY MITTARRRRRR</h1>
-    <span class="subtitle">CREATED BY UTSHAV</span>
-    <button class="btn" id="acceptBtn">APOLOGY ACCEPTED</button>
-  </div>
+    <div class="ambient-glow"></div>
 
-  <script>
-    document.getElementById('acceptBtn').addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      // Instagram Direct DM Link
-      const instagramDmUrl = 'https://ig.me/m/uv__0627';
+    <main class="container">
+        <h1 class="main-title">SORRY MITTARRRRRR</h1>
+        <div class="subtitle">CREATED BY UTSHAV</div>
+        <button class="btn-apology" id="acceptBtn">APOLOGY ACCEPTED</button>
+    </main>
 
-      // Open Instagram Direct DM
-      window.open(instagramDmUrl, '_blank');
-    });
-  </script>
+    <script>
+        document.getElementById('acceptBtn').addEventListener('click', function () {
+            const igUsername = "uv__0627";
+            const profileUrl = "https://www.instagram.com/uv__0627/";
+            
+            // Standard Instagram direct message deep links
+            // Modern iOS / Android deep-link attempt for direct messages
+            const appDirectUrl = `instagram://direct_thread?username=${igUsername}`;
+            
+            const startTime = Date.now();
 
+            // Attempt to launch Instagram app direct thread
+            window.location.href = appDirectUrl;
+
+            // Fallback check: If the app doesn't open within 1.5s, redirect to web profile
+            setTimeout(function () {
+                if (Date.now() - startTime < 2000) {
+                    window.location.href = profileUrl;
+                }
+            }, 1500);
+        });
+    </script>
 </body>
 </html>
