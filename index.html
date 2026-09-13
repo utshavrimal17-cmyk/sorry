@@ -67,11 +67,12 @@
       animation: fadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    /* Subtitle: created by utshav (Medium Size) */
+    /* Subtitle: CREATED BY UTSHAV (Medium Size & Uppercase) */
     .subtitle {
       font-size: clamp(1.1rem, 3.5vw, 1.8rem);
-      font-weight: 400;
-      letter-spacing: 0.12em;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
       color: rgba(255, 255, 255, 0.7);
       margin-top: 5px;
       margin-bottom: 40px;
@@ -130,7 +131,7 @@
 
   <div class="container">
     <h1>SORRY</h1>
-    <span class="subtitle">created by utshav</span>
+    <span class="subtitle">CREATED BY UTSHAV</span>
     <button class="btn" id="acceptBtn">APOLOGY ACCEPTED</button>
   </div>
 
@@ -138,12 +139,12 @@
     document.getElementById('acceptBtn').addEventListener('click', function(e) {
       e.preventDefault();
       
-      // WhatsApp Direct Link with Pre-filled message "Apology accepted"
+      // WhatsApp direct message text fully formatted
       const phone = '9779808904149';
-      const message = encodeURIComponent('Apology accepted');
-      const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
+      const text = encodeURIComponent('Apology accepted');
+      const whatsappUrl = 'https://api.whatsapp.com/send?phone=' + phone + '&text=' + text;
 
-      // Open WhatsApp Direct Chat
+      // Open WhatsApp Direct Chat with Pre-filled Message
       window.open(whatsappUrl, '_blank');
     });
   </script>
