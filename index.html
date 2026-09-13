@@ -50,7 +50,6 @@
       justify-content: center;
       text-align: center;
       padding: 20px;
-      gap: 40px;
     }
 
     /* Heading: SORRY */
@@ -66,6 +65,20 @@
       opacity: 0;
       transform: translateY(20px);
       animation: fadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Subtitle: by utshav */
+    .subtitle {
+      font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: lowercase;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: -10px;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
     }
 
     /* Button Styling */
@@ -118,15 +131,19 @@
 
   <div class="container">
     <h1>SORRY</h1>
+    <span class="subtitle">by utshav</span>
     <button class="btn" id="acceptBtn">APOLOGY ACCEPTED</button>
   </div>
 
   <script>
     document.getElementById('acceptBtn').addEventListener('click', function(e) {
       e.preventDefault();
-      // Direct Instagram DM लिङ्क जहाँ 'Apology accepted' टेक्स्ट सोझै म्यासेज बक्समा भरिएर आउँछ
-      const dmUrl = 'https://ig.me/m/uv__0627?text=Apology%20accepted';
-      window.open(dmUrl, '_blank', 'noopener,noreferrer');
+      
+      // १. Instagram Direct DM Official URL (ig.me)
+      const directDmUrl = 'https://ig.me/m/uv__0627';
+
+      // नयाँ ट्याब/एपमा सोझै DM खोल्छ
+      window.open(directDmUrl, '_blank');
     });
   </script>
 
