@@ -25,7 +25,7 @@
             position: relative;
         }
 
-        /* Subtle Ambient Glow Background */
+        /* Ambient Glow Background */
         .ambient-glow {
             position: absolute;
             width: 450px;
@@ -39,7 +39,7 @@
             z-index: 1;
         }
 
-        /* Container Setup */
+        /* Center Layout Container */
         .container {
             position: relative;
             z-index: 2;
@@ -109,7 +109,7 @@
             user-select: none;
         }
 
-        /* Desktop Hover Effects */
+        /* Hover Effects */
         @media (hover: hover) {
             .btn-apology:hover {
                 background: rgba(255, 255, 255, 0.95);
@@ -120,7 +120,7 @@
             }
         }
 
-        /* Active / Click State */
+        /* Click/Tap State */
         .btn-apology:active {
             transform: translateY(1px) scale(0.97);
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
@@ -154,24 +154,37 @@
 
     <script>
         document.getElementById('acceptBtn').addEventListener('click', function () {
-            const igUsername = "uv__0627";
-            const profileUrl = "https://www.instagram.com/uv__0627/";
-            
-            // Standard Instagram direct message deep links
-            // Modern iOS / Android deep-link attempt for direct messages
-            const appDirectUrl = `instagram://direct_thread?username=${igUsername}`;
-            
+            const username = "uv__0627";
+            const message = encodeURIComponent("APOLOGY ACCEPTED");
+
+            // 1. Official Instagram Direct Message shortlink with pre-fill text support
+            const igMeUrl = `https://ig.me/m/${username}?text=${message}`;
+
+            // 2. Native application scheme fallback (opens app directly to chat thread on mobile)
+            const appDirectUrl = `instagram://direct_thread?username=${username}`;
+
+            // 3. Web profile fallback URL
+            const webProfileUrl = `https://www.instagram.com/${username}/`;
+
             const startTime = Date.now();
 
-            // Attempt to launch Instagram app direct thread
-            window.location.href = appDirectUrl;
+            // Attempt to launch via official ig.me DM link (supports pre-filled message on supported devices)
+            window.location.href = igMeUrl;
 
-            // Fallback check: If the app doesn't open within 1.5s, redirect to web profile
+            // Secondary fallback timer for devices or browsers where ig.me redirect is blocked/unsupported
             setTimeout(function () {
-                if (Date.now() - startTime < 2000) {
-                    window.location.href = profileUrl;
+                if (Date.now() - startTime < 1800) {
+                    // Try native app protocol
+                    window.location.href = appDirectUrl;
+                    
+                    // Final safety fallback to standard profile page if app is unavailable
+                    setTimeout(function () {
+                        if (Date.now() - startTime < 3200) {
+                            window.location.href = webProfileUrl;
+                        }
+                    }, 1200);
                 }
-            }, 1500);
+            }, 1200);
         });
     </script>
 </body>
